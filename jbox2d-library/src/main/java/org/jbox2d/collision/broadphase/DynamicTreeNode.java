@@ -41,10 +41,6 @@ public class DynamicTreeNode {
   protected boolean leaf;
   protected int height;
 
-  public final boolean isLeaf() {
-    return child1 == null;
-  }
-
   public Object getUserData() {
     return userData;
   }
@@ -53,8 +49,7 @@ public class DynamicTreeNode {
     userData = argData;
   }
 
-  /**
-   * Should never be constructed outside the engine
-   */
-  protected DynamicTreeNode(int id) { this.id = id;}
+  protected DynamicTreeNode(int id) {
+    this.id = id;
+  }
 }
