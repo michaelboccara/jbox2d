@@ -38,10 +38,15 @@ import org.jbox2d.common.Rot;
 import org.jbox2d.common.Settings;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.common.Vec3;
+import org.jbox2d.dynamics.contacts.AABoxAndCircleContact;
+import org.jbox2d.dynamics.contacts.AABoxAndPolygonContact;
+import org.jbox2d.dynamics.contacts.AABoxContact;
+import org.jbox2d.dynamics.contacts.ChainAndAABoxContact;
 import org.jbox2d.dynamics.contacts.ChainAndCircleContact;
 import org.jbox2d.dynamics.contacts.ChainAndPolygonContact;
 import org.jbox2d.dynamics.contacts.CircleContact;
 import org.jbox2d.dynamics.contacts.Contact;
+import org.jbox2d.dynamics.contacts.EdgeAndAABoxContact;
 import org.jbox2d.dynamics.contacts.EdgeAndCircleContact;
 import org.jbox2d.dynamics.contacts.EdgeAndPolygonContact;
 import org.jbox2d.dynamics.contacts.PolygonAndCircleContact;
@@ -105,6 +110,31 @@ public class DefaultWorldPool implements IWorldPool {
       protected Contact newInstance () { return new ChainAndPolygonContact(world); }
     };
 
+    private final MutableStack<Contact> bbstack =
+    	    new MutableStack<Contact>(Settings.CONTACT_STACK_INIT_SIZE) {
+        protected Contact newInstance () { return new AABoxContact(world); }
+      };
+      
+      private final MutableStack<Contact> bcstack =
+      	    new MutableStack<Contact>(Settings.CONTACT_STACK_INIT_SIZE) {
+          protected Contact newInstance () { return new AABoxAndCircleContact(world); }
+        };
+        
+    private final MutableStack<Contact> bpstack =
+    	    new MutableStack<Contact>(Settings.CONTACT_STACK_INIT_SIZE) {
+        protected Contact newInstance () { return new AABoxAndPolygonContact(world); }
+      };
+      
+    private final MutableStack<Contact> ebstack =
+    	    new MutableStack<Contact>(Settings.CONTACT_STACK_INIT_SIZE) {
+        protected Contact newInstance () { return new EdgeAndAABoxContact(world); }
+      };
+      
+    private final MutableStack<Contact> chbstack =
+    	    new MutableStack<Contact>(Settings.CONTACT_STACK_INIT_SIZE) {
+        protected Contact newInstance () { return new ChainAndAABoxContact(world); }
+      };
+      
   private final Collision collision;
   private final TimeOfImpact toi;
   private final Distance dist;
@@ -164,6 +194,31 @@ public class DefaultWorldPool implements IWorldPool {
   @Override
   public IDynamicStack<Contact> getChainPolyContactStack() {
     return chpstack;
+  }
+
+  @Override
+  public IDynamicStack<Contact> getAABoxCircleContactStack() {
+	return bcstack;
+  }
+
+  @Override
+  public IDynamicStack<Contact> getAABoxPolyContactStack() {
+	return bpstack;
+  }
+
+  @Override
+  public IDynamicStack<Contact> getEdgeAABoxContactStack() {
+	return ebstack;
+  }
+
+  @Override
+  public IDynamicStack<Contact> getChainAABoxContactStack() {
+	return chbstack;
+  }
+
+  @Override
+  public IDynamicStack<Contact> getAABoxContactStack() {
+	return bbstack;
   }
 
   public final Vec2 popVec2() {

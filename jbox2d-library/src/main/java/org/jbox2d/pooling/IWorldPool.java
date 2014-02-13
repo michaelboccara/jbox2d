@@ -55,6 +55,16 @@ public interface IWorldPool {
     
     public IDynamicStack<Contact> getChainPolyContactStack();
     
+	public IDynamicStack<Contact> getAABoxCircleContactStack();
+
+	public IDynamicStack<Contact> getAABoxPolyContactStack();
+
+	public IDynamicStack<Contact> getEdgeAABoxContactStack();
+
+	public IDynamicStack<Contact> getChainAABoxContactStack();
+
+	public IDynamicStack<Contact> getAABoxContactStack();
+
 	public Vec2 popVec2();
 
 	public Vec2[] popVec2(int num);
@@ -98,4 +108,5 @@ public interface IWorldPool {
 	public int[] getIntArray(int argLength);
 
 	public Vec2[] getVec2Array(int argLength);
+
 }

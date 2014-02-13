@@ -213,13 +213,18 @@ public class World {
   }
 
   private void initializeRegisters() {
+	addType(pool.getAABoxContactStack(), ShapeType.AABOX, ShapeType.AABOX);
     addType(pool.getCircleContactStack(), ShapeType.CIRCLE, ShapeType.CIRCLE);
     addType(pool.getPolyCircleContactStack(), ShapeType.POLYGON, ShapeType.CIRCLE);
+    addType(pool.getAABoxCircleContactStack(), ShapeType.AABOX, ShapeType.CIRCLE);
     addType(pool.getPolyContactStack(), ShapeType.POLYGON, ShapeType.POLYGON);
+    addType(pool.getAABoxPolyContactStack(), ShapeType.AABOX, ShapeType.POLYGON);
     addType(pool.getEdgeCircleContactStack(), ShapeType.EDGE, ShapeType.CIRCLE);
     addType(pool.getEdgePolyContactStack(), ShapeType.EDGE, ShapeType.POLYGON);
+    addType(pool.getEdgeAABoxContactStack(), ShapeType.EDGE, ShapeType.AABOX);
     addType(pool.getChainCircleContactStack(), ShapeType.CHAIN, ShapeType.CIRCLE);
     addType(pool.getChainPolyContactStack(), ShapeType.CHAIN, ShapeType.POLYGON);
+    addType(pool.getChainAABoxContactStack(), ShapeType.CHAIN, ShapeType.AABOX);
   }
 
   public Contact popContact(Fixture fixtureA, int indexA, Fixture fixtureB, int indexB) {
