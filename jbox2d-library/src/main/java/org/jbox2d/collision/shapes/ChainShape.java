@@ -57,6 +57,11 @@ public class ChainShape extends Shape {
     m_count = 0;
   }
 
+  public void clear() {
+    m_vertices = null;
+    m_count = 0;
+  }
+
   @Override
   public int getChildCount() {
     return m_count - 1;
@@ -97,6 +102,13 @@ public class ChainShape extends Shape {
       edge.m_vertex3.y = m_nextVertex.y;
       edge.m_hasVertex3 = m_hasNextVertex;
     }
+  }
+
+  @Override
+  public float computeDistanceToOut(Transform xf, Vec2 p, int childIndex, Vec2 normalOut) {
+    final EdgeShape edge = pool0;
+    getChildEdge(edge, childIndex);
+    return edge.computeDistanceToOut(xf, p, 0, normalOut);
   }
 
   @Override

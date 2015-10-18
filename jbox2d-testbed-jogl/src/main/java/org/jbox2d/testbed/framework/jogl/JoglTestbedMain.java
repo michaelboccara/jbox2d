@@ -30,10 +30,10 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
 
 import org.jbox2d.testbed.framework.TestList;
 import org.jbox2d.testbed.framework.TestbedController;
+import org.jbox2d.testbed.framework.TestbedSettings;
 import org.jbox2d.testbed.framework.TestbedController.MouseBehavior;
 import org.jbox2d.testbed.framework.TestbedController.UpdateBehavior;
 import org.jbox2d.testbed.framework.TestbedErrorHandler;
@@ -63,6 +63,7 @@ public class JoglTestbedMain {
     model.setDebugDraw(new JoglDebugDraw(panel));
     model.setPanel(panel);
     TestList.populateModel(model);
+    model.getSettings().getSetting(TestbedSettings.DrawWireframe).enabled = false;
 
     JFrame testbed = new JFrame();
     testbed.setTitle("JBox2D Testbed");

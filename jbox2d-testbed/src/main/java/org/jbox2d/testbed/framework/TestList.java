@@ -27,6 +27,7 @@ import org.jbox2d.testbed.tests.ApplyForce;
 import org.jbox2d.testbed.tests.BlobTest4;
 import org.jbox2d.testbed.tests.BodyTypes;
 import org.jbox2d.testbed.tests.Breakable;
+import org.jbox2d.testbed.tests.BulletTest;
 import org.jbox2d.testbed.tests.Cantilever;
 import org.jbox2d.testbed.tests.Car;
 import org.jbox2d.testbed.tests.Chain;
@@ -39,17 +40,20 @@ import org.jbox2d.testbed.tests.ConfinedTest;
 import org.jbox2d.testbed.tests.ContinuousTest;
 import org.jbox2d.testbed.tests.ConvexHull;
 import org.jbox2d.testbed.tests.ConveyorBelt;
+import org.jbox2d.testbed.tests.DamBreak;
 import org.jbox2d.testbed.tests.DistanceTest;
 import org.jbox2d.testbed.tests.DominoTest;
 import org.jbox2d.testbed.tests.DominoTower;
+import org.jbox2d.testbed.tests.DrawingParticles;
 import org.jbox2d.testbed.tests.DynamicTreeTest;
 import org.jbox2d.testbed.tests.EdgeShapes;
 import org.jbox2d.testbed.tests.FixedPendulumTest;
 import org.jbox2d.testbed.tests.FreePendulumTest;
 import org.jbox2d.testbed.tests.Gears;
-import org.jbox2d.testbed.tests.LiquidTest;
+import org.jbox2d.testbed.tests.LiquidTimer;
 import org.jbox2d.testbed.tests.MotorTest;
 import org.jbox2d.testbed.tests.OneSidedTest;
+import org.jbox2d.testbed.tests.Particles;
 import org.jbox2d.testbed.tests.PistonTest;
 import org.jbox2d.testbed.tests.PolyShapes;
 import org.jbox2d.testbed.tests.PrismaticTest;
@@ -67,6 +71,7 @@ import org.jbox2d.testbed.tests.Tumbler;
 import org.jbox2d.testbed.tests.VaryingFrictionTest;
 import org.jbox2d.testbed.tests.VaryingRestitution;
 import org.jbox2d.testbed.tests.VerticalStack;
+import org.jbox2d.testbed.tests.WaveMachine;
 import org.jbox2d.testbed.tests.Web;
 
 /**
@@ -75,14 +80,22 @@ import org.jbox2d.testbed.tests.Web;
 public class TestList {
 
   public static void populateModel(TestbedModel model) {
-
+    // particles
+    model.addCategory("Particles");
+    model.addTest(new BulletTest());
+    model.addTest(new DamBreak());
+    model.addTest(new DrawingParticles());
+    model.addTest(new LiquidTimer());
+    model.addTest(new WaveMachine());
+    model.addTest(new Particles());
+    
     model.addCategory("Featured");
-    model.addTest(new Car());
     model.addTest(new DominoTest());
+    model.addTest(new Car());
     model.addTest(new CompoundShapes());
     model.addTest(new BlobTest4());
     model.addTest(new TheoJansen());
-
+    
     // watching...
     model.addCategory("Collision Watching");
     model.addTest(new VaryingRestitution());
@@ -142,6 +155,5 @@ public class TestList {
     model.addTest(new ConvexHull());
     model.addTest(new DynamicTreeTest());
     model.addTest(new DistanceTest());
-    model.addTest(new LiquidTest());
   }
 }
